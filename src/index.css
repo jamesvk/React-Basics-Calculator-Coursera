@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +65,116 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+*/
+
+/* ------------- Reset & base ------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+:root {
+  /* ------------ Color tokens (optional skeleton) ------------ */
+  --color-bg: #0f172a;          /* page background */
+  --color-surface: #111827;     /* card / calculator body */
+  --color-surface-alt: #020617; /* header / display bar */
+
+  --color-border-subtle: #1f2937;
+  --color-border-strong: #374151;
+
+  --color-text-main: #f9fafb;
+  --color-text-muted: #9ca3af;
+  --color-accent: #22c55e;
+  --color-accent-soft: #4ade80;
+  --color-danger: #ef4444;
+
+  /* ------------ Spacing scale (spacing tokens) ------------ */
+  /*
+    Use these for margin & padding:
+    xs = very tight, xl/2xl = larger gaps
+  */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-7: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+
+  /* Short aliases if you like them: */
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-5);
+  --space-xl: var(--space-6);
+
+  /* ------------ Type scale (font-size tokens) ------------ */
+  /*
+    Using clamp so sizes adjust slightly with viewport.
+    You can use these like: font-size: var(--font-size-body);
+  */
+
+  /* Body / base text */
+  --font-size-xs: clamp(0.7rem, 0.7rem + 0.2vw, 0.8rem);  /* helper text */
+  --font-size-sm: clamp(0.8rem, 0.8rem + 0.2vw, 0.9rem);  /* labels */
+  --font-size-body: clamp(0.9rem, 0.9rem + 0.2vw, 1rem);  /* main text */
+
+  /* Headings / emphasis */
+  --font-size-h6: clamp(0.95rem, 0.95rem + 0.3vw, 1.05rem);
+  --font-size-h5: clamp(1.05rem, 1.05rem + 0.3vw, 1.2rem);
+  --font-size-h4: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --font-size-h3: clamp(1.4rem, 1.2rem + 0.5vw, 1.6rem);
+  --font-size-h2: clamp(1.6rem, 1.4rem + 0.6vw, 1.9rem);
+  --font-size-h1: clamp(1.9rem, 1.6rem + 0.7vw, 2.2rem);
+
+  /* Short aliases: */
+  --font-size-label: var(--font-size-sm);
+  --font-size-button: var(--font-size-body);
+
+  /* ------------ Line-height tokens ------------ */
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+
+  /* ------------ Radii tokens (border-radius) ------------ */
+  /*
+    Use for border-radius:
+    - xs: small controls
+    - md: buttons
+    - lg/xl: cards / calculator body
+  */
+  --radius-0: 0;
+  --radius-xs: 0.125rem; /* 2px */
+  --radius-sm: 0.25rem;  /* 4px */
+  --radius-md: 0.5rem;   /* 8px */
+  --radius-lg: 0.75rem;  /* 12px */
+  --radius-xl: 1rem;     /* 16px */
+  --radius-pill: 999px;  /* fully rounded */
+
+  /* ------------ Shadow tokens ------------ */
+  --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.25);
+  --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+  /* ------------ Sizing tokens (useful for calculator) ------------ */
+  /*
+    For consistent app/card sizing.
+    You can tweak these for your calculator container.
+  */
+  --size-calculator-min-width: 320px;
+  --size-calculator-max-width: 360px;
+  --size-calculator-min-height: 480px;
+  --size-calculator-max-height: 560px;
+
+  /* ------------ Transition tokens ------------ */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 200ms ease-out;
+  --transition-slow: 300ms ease;
 }
