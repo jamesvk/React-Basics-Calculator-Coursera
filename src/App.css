@@ -25,8 +25,129 @@ button:nth-last-child(1) {
 }
 
 */
+/* form {
+    outline: 1.5px dotted yellowgreen;
+    height: 100%;
+} */
 
 .App {
     outline: 2px dotted red;
-    
+    position: relative; /* so the absolute child uses this as a reference */
+    width: 260px;
+    height: 360px;
 }
+
+#number-input {
+    width: 100%;
+}
+
+.equalsShell {
+    /* background: red; */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.resetsShell {
+    /* background: red; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%); 
+    width: 245px;
+    height: 320px;
+    display: flex;
+    flex-direction: row;
+}
+
+.reset {
+    outline: 1.5px dotted yellowgreen;
+    flex: 1; 
+    height: 100%; 
+    z-index: 1; 
+}   
+
+.resetInput {
+  background: #2A8A7B;
+}
+
+.resetResult {
+  background: #58BBA8;
+}
+
+.calculatorShell {
+    background: yellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%); /* perfect centering */
+    z-index: 3;
+    width: 200px;
+    height: 300px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "title"
+                         "display"
+                         "pad";
+    gap: var(--space-4);
+    margin: 0 auto;
+}
+
+/* Title */
+.calculator-header {
+    grid-area: title;
+}
+
+.calc-title {
+    text-align: center;
+}
+
+/* Display section */
+.display {
+    outline: 1px solid pink;
+    grid-area: display;
+}
+
+.display-row {
+    outline: 2px dotted green;
+    display: flex;
+    gap: var(--space-1);
+    margin-bottom: var(--space-2);
+}
+
+.keypad {
+    grid-area: pad;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-areas:
+        "seven  eight  nine   add"
+        "four   five   six    minus"
+        "one    two    three  times"
+        "resetI zero   resetR divide";
+    gap: var(--space-1);
+}
+
+/* Number keys */
+.key-seven { grid-area: seven; }
+.key-eight { grid-area: eight; }
+.key-nine  { grid-area: nine; }
+
+.key-four  { grid-area: four; }
+.key-five  { grid-area: five; }
+.key-six   { grid-area: six; }
+
+.key-one   { grid-area: one; }
+.key-two   { grid-area: two; }
+.key-three { grid-area: three; }
+
+.key-zero         { grid-area: zero; }
+.key-reset-input  { grid-area: resetI; }
+.key-reset-result { grid-area: resetR; }
+
+/* Operators */
+.op-add    { grid-area: add; }
+.op-minus  { grid-area: minus; }
+.op-times  { grid-area: times; }
+.op-divide { grid-area: divide; }
