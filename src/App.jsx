@@ -123,32 +123,39 @@ function App() {
             <button type="button" className="key key-seven">7</button>
             <button type="button" className="key key-eight">8</button>
             <button type="button" className="key key-nine">9</button>
-            <button type="button" className="op op-add">+</button>
+            <button type="button" className="op op-add" 
+              onClick={(e) => chooseOperator(e,"add")}>+</button>
 
             {/* Row 2 */}
             <button type="button" className="key key-four">4</button>
             <button type="button" className="key key-five">5</button>
             <button type="button" className="key key-six">6</button>
-            <button type="button" className="op op-minus">−</button>
+            <button type="button" className="op op-minus"
+              onClick={(e) => chooseOperator(e,"minus")}>−</button>
 
             {/* Row 3 */}
             <button type="button" className="key key-one">1</button>
             <button type="button" className="key key-two">2</button>
             <button type="button" className="key key-three">3</button>
-            <button type="button" className="op op-times">×</button>
+            <button type="button" className="op op-times"
+              onClick={(e) => chooseOperator(e,"times")}>×</button>
 
             {/* Row 4 (reset / zero / reset / divide) */}
-            <button type="button" className="key key-reset-input" onClick={resetInput}>
+            <button type="button" className="key key-reset-input" 
+              onClick={resetInput}>
               RI
             </button>
             <button type="button" className="key key-zero">0</button>
-            <button type="button" className="key key-reset-result" onClick={resetResult}>
+            <button type="button" className="key key-reset-result" 
+              onClick={resetResult}>
               RR
             </button>
-            <button type="button" className="op op-divide">÷</button>
+            <button type="button" className="op op-divide"
+              onClick={(e) => chooseOperator(e,"divide")}>÷</button>
 
             {/* Row 5 (equals) */}
-            <button type="button" className="op op-equals" onClick={resetInput}>
+            <button type="button" className="op op-equals" 
+              onClick={equals}>
               Equals
             </button>
           </section>
