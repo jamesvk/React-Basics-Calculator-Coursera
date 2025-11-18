@@ -87,16 +87,6 @@ function App() {
       <div className="equalsShell">
 
       </div>
-      {/*
-      <div  className="resetsShell">
-        <div className="resetInput reset">
-
-        </div>
-        <div className="resetResult reset">
-
-        </div>
-      </div>
-        */}
       
       <main className="calculatorShell" aria-labelledby="calc-title">
         <header className="calculator-header">
@@ -149,74 +139,21 @@ function App() {
 
             {/* Row 4 (reset / zero / reset / divide) */}
             <button type="button" className="key key-reset-input" onClick={resetInput}>
-              Reset Input
+              RI
             </button>
             <button type="button" className="key key-zero">0</button>
             <button type="button" className="key key-reset-result" onClick={resetResult}>
-              Reset Result
+              RR
             </button>
             <button type="button" className="op op-divide">÷</button>
+
+            {/* Row 5 (equals) */}
+            <button type="button" className="op op-equals" onClick={resetInput}>
+              Equals
+            </button>
           </section>
         </section>
       </main>
- {/* 
-      <div className="calculatorShell">
-        <h1 className="calc-title">Simplest Calculator</h1> 
-
-        <div className="calculator"> 
-          <section className="display">
-            <div className="display-row">
-             <span className="display-label">Result</span> 
-              <p className="display-result">{result}</p>
-            </div>
-
-            <div className="display-row">
-              <label className="display-label" htmlFor='number-input'>Input</label>
-              <input
-                id="number-input"
-                pattern="[0-9]" 
-                ref={inputRef} 
-                type="number" 
-                placeholder="Type a number" 
-                onChange={handleInputChange}
-                className="display-input"
-              /> 
-            </div>
-          </section>
-          
-        Numerical Keypad (digit buttons 0-9) 
-          <section className="keypad">
-        not programmed buttons yet
-            <button type="button">7</button>
-            <button type="button">8</button>
-            <button type="button">9</button>
-            <button type="button">4</button>
-            <button type="button">5</button>
-            <button type="button">6</button>
-            <button type="button">1</button>
-            <button type="button">2</button>
-            <button type="button">3</button>
-            <button type="button">0</button>
-          </section>
-        </div>
-      </div>
-
-      {/* 
-      <form> 
-        <p> 
-          {result} 
-        </p> 
-        
-        <button type="button" onClick={(e) => chooseOperator(e,"add")}>add</button> 
-        <button type="button" onClick={(e) => chooseOperator(e,"minus")}>minus</button> 
-        <button type="button" onClick={(e) => chooseOperator(e,"times")}>times</button> 
-        <button type="button" onClick={(e) => chooseOperator(e,"divide")}>divide</button> 
-        <button type="button" onClick={equals}>equal</button>
-        <button type="button" onClick={resetInput}>reset input</button> 
-        <button type="button" onClick={resetResult}>reset result</button> 
-      </form> 
-
-      */}
     </div> 
   )
 }

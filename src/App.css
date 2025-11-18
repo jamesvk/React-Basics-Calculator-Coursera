@@ -48,33 +48,6 @@ button:nth-last-child(1) {
     z-index: 1;
 }
 
-.resetsShell {
-    /* background: red; */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%); 
-    width: 245px;
-    height: 320px;
-    display: flex;
-    flex-direction: row;
-}
-
-.reset {
-    outline: 1.5px dotted yellowgreen;
-    flex: 1; 
-    height: 100%; 
-    z-index: 1; 
-}   
-
-.resetInput {
-  background: #2A8A7B;
-}
-
-.resetResult {
-  background: #58BBA8;
-}
-
 .calculatorShell {
     background: yellow;
     position: absolute;
@@ -118,6 +91,7 @@ button:nth-last-child(1) {
 }
 
 .keypad {
+    outline: 2px dotted blue;
     grid-area: pad;
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -125,9 +99,16 @@ button:nth-last-child(1) {
         "seven  eight  nine   add"
         "four   five   six    minus"
         "one    two    three  times"
-        "resetI zero   resetR divide";
+        "resetI zero   resetR divide"
+        "equals equals equals equals";
     gap: var(--space-1);
+
 }
+
+.key, .op {
+    outline: 1.5px dotted green;
+}
+
 
 /* Number keys */
 .key-seven { grid-area: seven; }
@@ -146,8 +127,12 @@ button:nth-last-child(1) {
 .key-reset-input  { grid-area: resetI; }
 .key-reset-result { grid-area: resetR; }
 
+
 /* Operators */
 .op-add    { grid-area: add; }
 .op-minus  { grid-area: minus; }
 .op-times  { grid-area: times; }
 .op-divide { grid-area: divide; }
+
+/* Equals */
+.op-equals { grid-area: equals;}
