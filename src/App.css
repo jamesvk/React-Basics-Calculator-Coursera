@@ -31,7 +31,6 @@ button:nth-last-child(1) {
 } */
 
 .App {
-    outline: 2px dotted red;
     position: relative; /* so the absolute child uses this as a reference */
     width: 260px;
     height: 360px;
@@ -48,50 +47,149 @@ button:nth-last-child(1) {
     z-index: 1;
 }
 
+
 .calculatorShell {
-    background: yellow;
+    background-color: var(--calc-surface);
+    align-items: stretch;  /* children fill their tracks */
     position: absolute;
+    flex-shrink: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%); /* perfect centering */
     z-index: 3;
-    width: 200px;
-    height: 300px;
-
+    width: 100%;
+    
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     grid-template-areas: "title"
                          "display"
                          "pad";
-    gap: var(--space-4);
+    gap: 0;
     margin: 0 auto;
+    backdrop-filter: blur(18px);
+    border-radius: var(--radius-md);
+    box-shadow:
+    0 0 30px rgba(138, 92, 255, 0.20), /* glow */
+    0 18px 36px rgba(0, 0, 0, 0.65);  /* depth */    
+}
+
+.calculatorShell > * {
+    margin-block: 0;
+    min-width: 0;
+    max-width: 100%;
+    /*border: 2px dotted red;*/
 }
 
 /* Title */
 .calculator-header {
     grid-area: title;
+    padding-block: var(--space-2);
 }
 
 .calc-title {
+    max-width: 100%;
     text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: var(--accent);
+    text-shadow:
+    0 0 1px var(--accent),
+    1.5px 1px 2px rgba(204, 255, 0, .5);
+    /* 0 0 3px var(--accent-glow); */
 }
 
 /* Display section */
 .display {
-    outline: 1px solid pink;
     grid-area: display;
+    position: relative;
+    overflow: hidden; /* clip pseudo background to this area */
 }
 
-.display-row {
-    outline: 2px dotted green;
+/*.display-result-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;  
+    z-index: 0;             
+    pointer-events: none;    
     display: flex;
-    gap: var(--space-1);
-    margin-bottom: var(--space-2);
+} */
+
+.display-row {
+    /* outline: 2px solid red; */
+    text-align: center;
+}
+
+.display-result-row {
+    /*background: rgba(184, 148, 255, .55);
+    font-family: 'Orbitron', sans-serif;
+    font-size: var(--font-size-h5);
+    font-weight: 150;
+    letter-spacing: var(--space-0);
+    color: rgba(232, 255, 122, .9);
+
+    text-shadow:
+        0 0 6px rgba(138, 92, 255, 0.35),  
+        0 0 16px rgba(138, 92, 255, 0.20);*/
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(184,148,255,0.45),
+            rgba(184,148,255,0.18) 55%,
+            transparent 95%
+        ),
+        rgba(184,148,255,0.20);
+
+    font-family: 'Orbitron', sans-serif;
+    color: rgba(232,255,122,0.95);
+
+    text-shadow:
+        0 0 8px rgba(184,148,255,.9),
+        0 0 3px rgba(138, 92, 255, .2);
+}
+
+#number-input {
+    width: 100%;
+    /* Off-white panel */
+    background: #F8F8FA; /* slightly off-white */
+    color: rgba(0,0,0,.55);         /* clean dark text */
+
+    border-top: .15px solid rgba(0,0,0,.5);
+    border-bottom: .15px solid rgba(0,0,0,.5);
+    border-left: .1px solid rgba(0,0,0,.35);
+    border-right: .1px solid rgba(0,0,0,.35);
+
+
+
+    font-family: 'Rajdhani', sans-serif; /* or Orbitron if you want more futuristic */
+    font-size: var(--font-size-h6);
+    letter-spacing: 0.03em;
+
+    text-align: center; /* centers placeholder AND typed text */
+    text-shadow:
+        0 1px 2px rgba(255, 255, 255, 0.55),
+        0 0 6px rgba(0, 0, 0, 0.25);
+    outline: none;
+
+    /* subtle premium shadow */
+    box-shadow:
+        inset 0 1px 3px rgba(0,0,0,.3),
+        0 1px 5px rgba(0,0,0,.1);
+}
+
+#number-input::-webkit-outer-spin-button,
+#number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#number-input::placeholder {
+    color: rgba(0,0,0,.55);
+    font-family: inherit;
+    font-style: italic;   /* <— italic placeholder */
+    text-align: center;
 }
 
 .keypad {
-    outline: 2px dotted blue;
     grid-area: pad;
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -102,13 +200,27 @@ button:nth-last-child(1) {
         "resetI zero   resetR divide"
         "equals equals equals equals";
     gap: var(--space-1);
-
+    margin-block: .1rem;
 }
 
-.key, .op {
-    outline: 1.5px dotted green;
+.keypad button {
+    margin-block: .1rem;
+    margin-inline: .025rem;
+    padding: 0.35rem 0;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Orbitron', sans-serif;
+    font-size: var(--font-size-h6);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: 160ms ease;
 }
 
+.keypad button:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 0 2px rgba(0,0,0,0.2) inset;
+}
 
 /* Number keys */
 .key-seven { grid-area: seven; }
@@ -135,4 +247,7 @@ button:nth-last-child(1) {
 .op-divide { grid-area: divide; }
 
 /* Equals */
-.op-equals { grid-area: equals;}
+.op-equals { 
+    grid-area: equals;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}

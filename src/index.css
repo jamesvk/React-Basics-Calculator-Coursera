@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&display=swap');
+
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -76,10 +84,51 @@ button:focus-visible {
 html, body {
   height: 100%;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  /* background: rgba(163, 161, 197, .20); */
+  background: rgba(184, 148, 255, .10);
 }
 
 :root {
   /* ------------ Color tokens (optional skeleton) ------------ */
+
+  /* Cyber Violet */
+  --calc-bg: #0C0C17;
+  --calc-surface: #161625;
+  --calc-border: #2D2C46;
+
+  --text-primary: #ECEAFF;
+  --text-secondary: #A3A1C5;
+
+  --accent: #8A5CFF;          /* neon violet */
+  --accent-glow: #B894FF;
+  /* Pure neon yellow */
+  --neon-yellow-pure: #FFFF33;
+  --neon-yellow-pure-glow: #FFFF99;
+
+  /* Electric yellow (cyberpunk) */
+  --neon-yellow-electric: #CCFF00;
+  --neon-yellow-electric-glow: #E6FF66;
+
+  /* Laser yellow */
+  --neon-yellow-laser: #F8FF00;
+  --neon-yellow-laser-glow: #FDFF66;
+
+  /* Acid neon */
+  --neon-yellow-acid: #D0FF14;
+  --neon-yellow-acid-glow: #E8FF7A;
+
+  /* Neon lemon */
+  --neon-yellow-lemon: #FFFC00;
+  --neon-yellow-lemon-glow: #FFF966;
+
+  /* -------- */
+
   --color-bg: #0f172a;          /* page background */
   --color-surface: #111827;     /* card / calculator body */
   --color-surface-alt: #020617; /* header / display bar */
@@ -92,6 +141,7 @@ html, body {
   --color-accent: #22c55e;
   --color-accent-soft: #4ade80;
   --color-danger: #ef4444;
+  
 
   /* ------------ Spacing scale (spacing tokens) ------------ */
   /*
@@ -158,8 +208,6 @@ html, body {
   --transition-normal: 180ms ease-out;
   --transition-slow: 260ms ease;
 
-
-#root {
   height: 100%;
   display: flex;
   justify-content: center;

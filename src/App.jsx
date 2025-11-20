@@ -44,7 +44,7 @@ function App() {
   }
 
   function chooseOperator (e, op) {
-    e.preventDefault(); /* By default, a button inside a form has a 
+    /*e.preventDefault();  By default, a button inside a form has a 
                            type of ‘submit’. We originally added 
                            preventDefault() so the page wouldn’t reload 
                            and reset the component’s state. Changing the button 
@@ -100,27 +100,27 @@ function App() {
     <div className="App">
       <main className="calculatorShell" aria-labelledby="calc-title">
         <header className="calculator-header">
-          <h1 id="calc-title" className="calc-title">Simplest Calculator</h1>
+          <h2 id="calc-title" className="calc-title">SIMPLEST CALCULATOR</h2>
         </header>
 
         <section className="calculator" aria-label="Calculator interface">
           {/* Display / result + input */}
           <section className="display" aria-label="Calculator display">
             {/* Result */}
-            <div className="display-row">
+            <div className="display-row display-result-row">
               <output className="display-result" aria-live="polite" aria-label="Current result">
                 {result}
               </output>
             </div>
 
             {/* Input */}
-            <div className="display-row">
+            <div className="display-row display-input-row">
               <input
                 id="number-input"
                 pattern="[0-9]"
                 ref={inputRef}
                 type="number"
-                placeholder="Type a number"
+                placeholder="type or click a number"
                 value={inputValue}
                 onChange={handleInputChange}
                 className="display-input"
