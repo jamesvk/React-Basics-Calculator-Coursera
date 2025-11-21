@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -95,6 +95,74 @@ function App() {
     setFirstNumber(0);
     setInputValue("");
   }; 
+
+  // Keyboard buttons
+  useEffect(() => {
+    function handleKeyDown(event) {
+      const {key, shiftKey} = event;
+
+      // If the user presses a digit key 0–9, treat it like a button click
+      if (key >= "0" && key <= "9") {
+        event.preventDefault();
+        handleDigitClick(Number(key));
+      }
+
+      // (optional) later:
+      // if (key === "Enter" || key === "=") doEquals(event);
+      // if (key === "Escape") resetAll(event);
+
+      // ----- EQUALS (Enter or "=") -----
+      if (key === "Enter" || key === "=") {
+        event.preventDefault();
+        equals(event);
+        return;
+      }
+
+      // ----- RESET (Esc) -----
+      if (key === "Escape") {
+        event.preventDefault();
+        resetResult(event);
+        return;
+      }
+
+      // ----- OPERATORS -----
+
+      // "+" → must press Shift + "=" on keyboard
+      if (shiftKey && key === "+") {
+        event.preventDefault();
+        chooseOperator(event, "add");
+        return;
+      }
+
+      // "-" key (no need for shift on most keyboards)
+      if (key === "-") {
+        event.preventDefault();
+        chooseOperator(event, "minus");
+        return;
+      }
+
+      // "*" → Shift + "8"
+      if (shiftKey && key === "*") {
+        event.preventDefault();
+        chooseOperator(event, "times");
+        return;
+      }
+
+      // "/" → divide
+      if (key === "/") {
+        event.preventDefault();
+        chooseOperator(event, "divide");
+        return;
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    // Clean up on re-render/unmount so we don't stack listeners
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };  
+  }, [firstNumber, nextNumber, operator]);
+
 
   return ( 
     <div className="App">
