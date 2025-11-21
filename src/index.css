@@ -91,7 +91,7 @@ html, body {
 
 body {
   /* background: rgba(163, 161, 197, .20); */
-  background: rgba(184, 148, 255, .10);
+  background: rgba(138, 92, 255, .125);
 }
 
 :root {
@@ -141,6 +141,24 @@ body {
   --color-accent: #22c55e;
   --color-accent-soft: #4ade80;
   --color-danger: #ef4444;
+
+  /* --- Cool Cyber Pink Set --- */
+  --pink-soft-cyber: #FF8AE8;        /* rgb(255, 138, 232) */
+  --pink-mid-cyber: #FF5CDA;         /* rgb(255, 92, 218) */
+  --pink-hot-cyber: #FF33CC;         /* rgb(255, 51, 204) */
+  --pink-electric: #FF0FCF;          /* rgb(255, 15, 207) */
+  --pink-violet-hybrid: #D66BFF;     /* rgb(214, 107, 255) */
+
+  --pink-pastel-rose: #FFB2D8;       /* rgb(255, 178, 216) */
+  --pink-cotton-candy: #FF99EE;      /* rgb(255, 153, 238) */
+  --pink-glass-neon: #FFB7F5;        /* rgb(255, 183, 245) */
+
+  /* --- Deep Futuristic Magenta --- */
+  --pink-synthwave: #D400A8;         /* rgb(212, 0, 168) */
+  --pink-plasma: #C60096;            /* rgb(198, 0, 150) */
+  --pink-ultraviolet: #9A009C;       /* rgb(154, 0, 156) */
+
+  
   
 
   /* ------------ Spacing scale (spacing tokens) ------------ */

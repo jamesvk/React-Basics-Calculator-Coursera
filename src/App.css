@@ -5,7 +5,6 @@
 }
 
 .calculatorShell {
-    background-color: var(--calc-surface);
     align-items: stretch;  /* children fill their tracks */
     position: absolute;
     flex-shrink: 0;
@@ -25,11 +24,25 @@
     gap: var(--space-2);
     padding: var(--space-2) var(--space-2) var(--space-3);
     margin: 0 auto;
+    /* background-color: var(--calc-surface);
     backdrop-filter: blur(18px);
+    border-radius: var(--radius-md); */
+    /* box-shadow:
+    0 0 30px rgba(138, 92, 255, 0.20), glow
+    0 18px 36px rgba(0, 0, 0, 0.65); /* depth */    
+    background:
+    radial-gradient(circle at top, #1a1b30 0%, #0b0c17 45%, #05060c 100%);
+    border: 1px solid rgba(138, 92, 255, .85);
     border-radius: var(--radius-md);
     box-shadow:
-    0 0 30px rgba(138, 92, 255, 0.20), /* glow */
-    0 18px 36px rgba(0, 0, 0, 0.65);  /* depth */    
+        0 0 30px rgba(138, 92, 255, 0.32),
+        0 18px 36px rgba(0, 0, 0, 0.85),
+        0 0 8px rgba(138, 92, 255, 0.65),
+        0 0 4px rgba(138, 92, 255, 0.45),
+        0 0 6px rgba(138, 92, 255, 0.25);
+
+    backdrop-filter: blur(18px);
+    transition: color 280ms ease, text-shadow 280ms ease;
 }
 
 .calculatorShell > * {
@@ -42,6 +55,7 @@
     grid-area: title;
     padding-top: var(--space-2);
     padding-bottom: 0;
+    
 }
 
 .calc-title {
@@ -51,7 +65,18 @@
     color: var(--accent);
     text-shadow:
     0 0 1px var(--accent),
-    1.5px 1px 2px rgba(204, 255, 0, .6);
+    1.5px 1px 2px rgba(204, 255, 0, .6); 
+    transition: color 280ms ease, text-shadow 280ms ease;
+    cursor: pointer;
+}
+
+.calc-title:hover {
+  color: rgba(232, 255, 122, .9);
+
+  text-shadow:
+    0 0 1px var(--accent),
+    1.5px 1px 2px rgba(138, 92, 255, .5);
+
 }
 
 .display {
@@ -124,7 +149,7 @@
     padding: 0.4rem 0.7rem;
 }
 
-#number-input::-webkit-outer-spin-button,
+/*#number-input::-webkit-outer-spin-button,
 #number-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -133,9 +158,9 @@
 #number-input::placeholder {
     color: rgba(0,0,0,.55);
     font-family: inherit;
-    font-style: italic;   /* <— italic placeholder */
+    font-style: italic;   /* <— italic placeholder 
     text-align: center;
-}
+}*/
 
 .keypad {
     grid-area: pad;
@@ -165,16 +190,36 @@
     background: rgba(196,158,255,0.28);
     color: rgba(232,255,122,0.95);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(184,148,255,0.6); 
-    /* border: 1PX solid rgba(255, 255, 255, .75); */
+    /*border: 1px solid rgba(184,148,255,.9); 
+    border: 1px solid rgba(255, 255, 255, .6); */
+    border: 1.5px solid rgba(214, 107, 255, .475);
 
     box-shadow:
-        0 0 10px rgba(184,148,255,0.4),
-        inset 0 0 8px rgba(255,255,255,0.1);
+        0 0 4px rgba(184,148,255,.5),
+        inset 0 0 4px rgba(255,255,255, .25);
+}
+/* Hover: slightly brighter, small lift, stronger glow */
+.keypad button:hover {
+  /*background: rgba(196, 158, 255, 0.35);
+  background: radial-gradient(circle at top, rgba(232,255,122,0.95), rgba(138,92,255,0.9));
+  border-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  
+  box-shadow:
+    0 0 10px rgba(184, 148, 255, 0.6),
+    0 6px 14px rgba(0, 0, 0, 0.7),
+    inset 0 0 5px rgba(255, 255, 255, 0.25);*/
+  border-color: rgba(255, 138, 232, 0.75); /* mid-cyber pink highlight */
+  background: rgba(196, 158, 255, 0.32);  /* deeper glass */
+  box-shadow:
+    0 0 3px rgba(255, 92, 218, 0.75),
+    inset 0 0 6px rgba(255,255,255,0.22);
+
+    transform: translateY(.5px);
 }
 
 .keypad button:active {
-    transform: translateY(1px);
+    transform: translateY(.875px);
     box-shadow:
         0 0 2px rgba(0,0,0,0.2) inset;
 }
