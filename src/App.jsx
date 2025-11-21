@@ -4,35 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  // const inputRef = useRef(null); 
   const [firstNumber, setFirstNumber] = useState(null);
   const [nextNumber, setNextNumber] = useState(null);
   const [operator, setOperator] = useState(null);
   const [result, setResult] = useState(0);
   const [printScreen, setPrintScreen] = useState("");
-  // const [inputValue, setInputValue] = useState("");
-
-  /* function handleInputChange(e) {
-    
-    const raw = e.target.value;
-    const trimmed= raw.slice(0,1); //keep only one digit;
-    setInputValue(trimmed);
-
-    const value = trimmed === '' ? 0 : Number(trimmed);
-    
-    if (operator === null) {
-      setResult(value);
-      setFirstNumber(value);
-    } else if (firstNumber){
-      // setFirstNumber(result);
-      setResult(value);
-      setNextNumber(value);
-    } 
-  } */
 
   function handleDigitClick (e) {
     const value = Number(e);
-    // setInputValue(String(value)); //show it in the input bar too
 
     if (operator === null) {
       setFirstNumber(value);
@@ -72,28 +51,15 @@ function App() {
 
   function chooseOperator (e, op) {
     const symbol = Op_Symbols[op] || op;
-    /*e.preventDefault();  By default, a button inside a form has a 
-                           type of ‘submit’. We originally added 
-                           preventDefault() so the page wouldn’t reload 
-                           and reset the component’s state. Changing the button 
-                           type to "button" removes the submit behavior, which 
-                           prevents the page from reloading. It does NOT cause 
-                           a reload. It stops one. */
-    // inputRef.current.value = '';
     setOperator(op);
     setPrintScreen(prev => {
       const trimmed = prev.trim();
       if (!trimmed) return "";
       
-      /*( If the display already ends with an operator, REPLACE it
-      if (/[+\-×/]$/.test(trimmed)) {
-      remove last char (old operator), add new one
-        return trimmed.slice(0, -1) + symbol;
-     } - Regex issue */
-      
       const lastChar = trimmed[trimmed.length - 1];
       const isOperatorChar = ["+", "−", "×", "/"].includes(lastChar);
       
+      // If the display already ends with an operator, REPLACE it
       if (isOperatorChar && nextNumber == null) {
         return trimmed.slice(0, -1) + symbol;
       }
@@ -118,17 +84,9 @@ function App() {
     setFirstNumber(newResult);  // carry result forward for chaining
     setNextNumber(null);        // clear second number
     setOperator(null);          // ready for a new operator
-    // setInputValue("");          optional: clear input text
     setPrintScreen(String(newResult));
-    /* if (inputRef.current) {
-      inputRef.current.value = "";
-    } */
   }
 
-  function resetInput(e) { 
-    e.preventDefault();
-    // inputRef.current.value = '';
-  }; 
  
   function resetResult(e) { 
   	e.preventDefault();
@@ -137,7 +95,6 @@ function App() {
     setFirstNumber(0);
     setOperator(null);
     setPrintScreen("");
-    //setInputValue("");
   }; 
 
   // Keyboard buttons
@@ -150,10 +107,6 @@ function App() {
         event.preventDefault();
         handleDigitClick(Number(key));
       }
-
-      // (optional) later:
-      // if (key === "Enter" || key === "=") doEquals(event);
-      // if (key === "Escape") resetAll(event);
 
       // ----- EQUALS (Enter or "=") -----
       if (key === "Enter" || key === "=") {
@@ -224,21 +177,6 @@ function App() {
                 {printScreen || result}
               </output>
             </div>
-
-            {/* Input 
-            <div className="display-row display-input-row">
-              <input
-                id="number-input"
-                pattern="[0-9]"
-                ref={inputRef}
-                type="number"
-                placeholder="type or click a number"
-                value={inputValue}
-                onChange={handleInputChange}
-                className="display-input"
-              />
-            </div>
-          */} 
           </section>
 
           {/* Keypad: numbers, resets, operators */}
@@ -274,35 +212,18 @@ function App() {
               onClick={(e) => chooseOperator(e,"times")}>×</button>
 
             {/* Row 4 (reset / zero / equal) */}
-            {/* Row 4 (reset / zero / reset / divide) */}
-            {/* <button type="button" className="key key-reset-input" 
-                onClick={resetInput}>
-                RI
-              </button>
-            */}
             <button type="button" className="key key-reset-result" 
               onClick={resetResult}>
               R
             </button>
             <button type="button" className="key key-zero"
               onClick={(e) => handleDigitClick(0)}>0</button>
-            {/* <button type="button" className="key key-reset-result" 
-                onClick={resetResult}>
-                RR
-            </button> */}
             <button type="button" className="key key-equals" 
               onClick={equals}>
               E
             </button>
-
             <button type="button" className="op op-divide"
               onClick={(e) => chooseOperator(e,"divide")}>/</button>
-
-            {/* Row 5 (equals) */}
-            {/* <button type="button" className="op op-equals" 
-                onClick={equals}>
-                Equals
-            </button> */}
           </section>
         </section>
       </main>
