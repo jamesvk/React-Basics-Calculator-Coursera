@@ -1,52 +1,8 @@
-/* 
-
-* {
-    font-family: sans-serif;
-}
-input,
-button {
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 5px;
-}
-input {
-    display: block;
-    margin-bottom: 20px;
-}
-button {
-    border: 1px solid gray;
-    background: whitesmoke;
-    margin-right: 5px;
-}
-button:nth-last-child(2),
-button:nth-last-child(1) {
-    background: tomato;
-    color: white;
-}
-
-*/
-/* form {
-    outline: 1.5px dotted yellowgreen;
-    height: 100%;
-} */
-
 .App {
     position: relative; /* so the absolute child uses this as a reference */
     width: 260px;
     height: 360px;
 }
-
-#number-input {
-    width: 100%;
-}
-
-.equalsShell {
-    /* background: red; */
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
 
 .calculatorShell {
     background-color: var(--calc-surface);
@@ -65,7 +21,9 @@ button:nth-last-child(1) {
     grid-template-areas: "title"
                          "display"
                          "pad";
-    gap: 0;
+    /* gap: 0; */
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-2) var(--space-3);
     margin: 0 auto;
     backdrop-filter: blur(18px);
     border-radius: var(--radius-md);
@@ -78,13 +36,12 @@ button:nth-last-child(1) {
     margin-block: 0;
     min-width: 0;
     max-width: 100%;
-    /*border: 2px dotted red;*/
 }
 
-/* Title */
 .calculator-header {
     grid-area: title;
-    padding-block: var(--space-2);
+    padding-top: var(--space-2);
+    padding-bottom: 0;
 }
 
 .calc-title {
@@ -94,42 +51,25 @@ button:nth-last-child(1) {
     color: var(--accent);
     text-shadow:
     0 0 1px var(--accent),
-    1.5px 1px 2px rgba(204, 255, 0, .5);
-    /* 0 0 3px var(--accent-glow); */
+    1.5px 1px 2px rgba(204, 255, 0, .6);
 }
 
-/* Display section */
 .display {
     grid-area: display;
     position: relative;
     overflow: hidden; /* clip pseudo background to this area */
+    display: grid;
+    gap: var(--space-1);
 }
 
-/*.display-result-row::before {
-    content: "";
-    position: absolute;
-    inset: 0;  
-    z-index: 0;             
-    pointer-events: none;    
-    display: flex;
-} */
-
 .display-row {
-    /* outline: 2px solid red; */
     text-align: center;
+    text-align: right;
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-sm);
 }
 
 .display-result-row {
-    /*background: rgba(184, 148, 255, .55);
-    font-family: 'Orbitron', sans-serif;
-    font-size: var(--font-size-h5);
-    font-weight: 150;
-    letter-spacing: var(--space-0);
-    color: rgba(232, 255, 122, .9);
-
-    text-shadow:
-        0 0 6px rgba(138, 92, 255, 0.35),  
-        0 0 16px rgba(138, 92, 255, 0.20);*/
     background:
         radial-gradient(
             circle at center,
@@ -141,10 +81,15 @@ button:nth-last-child(1) {
 
     font-family: 'Orbitron', sans-serif;
     color: rgba(232,255,122,0.95);
+    font-size: var(--font-size-h5);
 
     text-shadow:
         0 0 8px rgba(184,148,255,.9),
         0 0 3px rgba(138, 92, 255, .2);
+
+    box-shadow:
+        inset 0 0 12px rgba(255,255,255,0.05),
+        0 2px 10px rgba(0,0,0,0.45);
 }
 
 #number-input {
@@ -153,14 +98,15 @@ button:nth-last-child(1) {
     background: #F8F8FA; /* slightly off-white */
     color: rgba(0,0,0,.55);         /* clean dark text */
 
-    border-top: .15px solid rgba(0,0,0,.5);
+    /* border-top: .15px solid rgba(0,0,0,.5);
     border-bottom: .15px solid rgba(0,0,0,.5);
     border-left: .1px solid rgba(0,0,0,.35);
-    border-right: .1px solid rgba(0,0,0,.35);
+    border-right: .1px solid rgba(0,0,0,.35); */
+    border-radius: var(--radius-sm);
+    border: 0.5px solid rgba(0,0,0,0.35);
 
 
-
-    font-family: 'Rajdhani', sans-serif; /* or Orbitron if you want more futuristic */
+    font-family: 'Orbitron', sans-serif;
     font-size: var(--font-size-h6);
     letter-spacing: 0.03em;
 
@@ -174,6 +120,8 @@ button:nth-last-child(1) {
     box-shadow:
         inset 0 1px 3px rgba(0,0,0,.3),
         0 1px 5px rgba(0,0,0,.1);
+
+    padding: 0.4rem 0.7rem;
 }
 
 #number-input::-webkit-outer-spin-button,
@@ -200,12 +148,9 @@ button:nth-last-child(1) {
         "resetI zero   resetR divide"
         "equals equals equals equals";
     gap: var(--space-1);
-    margin-block: .1rem;
 }
 
 .keypad button {
-    margin-block: .1rem;
-    margin-inline: .025rem;
     padding: 0.35rem 0;
     border: none;
     border-radius: var(--radius-sm);
@@ -214,6 +159,14 @@ button:nth-last-child(1) {
     letter-spacing: 0.04em;
     cursor: pointer;
     transition: 160ms ease;
+    background: rgba(196,158,255,0.28);
+    color: rgba(232,255,122,0.95);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(184,148,255,0.45);
+
+    box-shadow:
+        0 0 10px rgba(184,148,255,0.4),
+        inset 0 0 8px rgba(255,255,255,0.1);
 }
 
 .keypad button:active {

@@ -12,7 +12,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
 
   function handleInputChange(e) {
-
+    
     const raw = e.target.value;
     const trimmed= raw.slice(0,1); //keep only one digit;
     setInputValue(trimmed);
@@ -126,6 +126,7 @@ function App() {
                 className="display-input"
               />
             </div>
+            
           </section>
 
           {/* Keypad: numbers, resets, operators */}
