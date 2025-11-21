@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const inputRef = useRef(null); 
+  // const inputRef = useRef(null); 
   const [result, setResult] = useState(0);
   const [operator, setOperator] = useState(null);
   const [nextNumber, setNextNumber] = useState(null);
@@ -31,13 +31,12 @@ function App() {
 
   function handleDigitClick (e) {
     const value = Number(e);
-    setInputValue(String(value)); //show it in the input bar too
+    // setInputValue(String(value)); //show it in the input bar too
 
     if (operator === null) {
       setResult(value);
       setFirstNumber(value);
     } else if (firstNumber){
-      // setFirstNumber(result);
       setResult(value);
       setNextNumber(value);
     } 
@@ -51,7 +50,7 @@ function App() {
                            type to "button" removes the submit behavior, which 
                            prevents the page from reloading. It does NOT cause 
                            a reload. It stops one. */
-    inputRef.current.value = '';
+    // inputRef.current.value = '';
     setOperator(op);
   }
 
@@ -85,7 +84,7 @@ function App() {
 
   function resetInput(e) { 
     e.preventDefault();
-    inputRef.current.value = '';
+    // inputRef.current.value = '';
   }; 
  
   function resetResult(e) { 
@@ -181,7 +180,7 @@ function App() {
               </output>
             </div>
 
-            {/* Input */}
+            {/* Input 
             <div className="display-row display-input-row">
               <input
                 id="number-input"
@@ -194,7 +193,7 @@ function App() {
                 className="display-input"
               />
             </div>
-            
+          */} 
           </section>
 
           {/* Keypad: numbers, resets, operators */}
@@ -229,25 +228,36 @@ function App() {
             <button type="button" className="op op-times"
               onClick={(e) => chooseOperator(e,"times")}>×</button>
 
+            {/* Row 4 (reset / zero / equal) */}
             {/* Row 4 (reset / zero / reset / divide) */}
-            <button type="button" className="key key-reset-input" 
-              onClick={resetInput}>
-              RI
+            {/* <button type="button" className="key key-reset-input" 
+                onClick={resetInput}>
+                RI
+              </button>
+            */}
+            <button type="button" className="key key-reset-result" 
+              onClick={resetResult}>
+              R
             </button>
             <button type="button" className="key key-zero"
               onClick={(e) => handleDigitClick(0)}>0</button>
-            <button type="button" className="key key-reset-result" 
-              onClick={resetResult}>
-              RR
+            {/* <button type="button" className="key key-reset-result" 
+                onClick={resetResult}>
+                RR
+            </button> */}
+            <button type="button" className="key key-equals" 
+              onClick={equals}>
+              E
             </button>
+
             <button type="button" className="op op-divide"
               onClick={(e) => chooseOperator(e,"divide")}>÷</button>
 
             {/* Row 5 (equals) */}
-            <button type="button" className="op op-equals" 
-              onClick={equals}>
-              Equals
-            </button>
+            {/* <button type="button" className="op op-equals" 
+                onClick={equals}>
+                Equals
+            </button> */}
           </section>
         </section>
       </main>

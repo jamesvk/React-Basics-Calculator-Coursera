@@ -145,9 +145,12 @@
         "seven  eight  nine   add"
         "four   five   six    minus"
         "one    two    three  times"
+        "resetR zero   equals divide";
+        /* "test   test   test   test";
         "resetI zero   resetR divide"
-        "equals equals equals equals";
+        "equals equals equals equals"; */
     gap: var(--space-1);
+    margin-top: var(--space-2);
 }
 
 .keypad button {
@@ -162,7 +165,8 @@
     background: rgba(196,158,255,0.28);
     color: rgba(232,255,122,0.95);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(184,148,255,0.45);
+    border: 1px solid rgba(184,148,255,0.6); 
+    /* border: 1PX solid rgba(255, 255, 255, .75); */
 
     box-shadow:
         0 0 10px rgba(184,148,255,0.4),
@@ -188,10 +192,10 @@
 .key-two   { grid-area: two; }
 .key-three { grid-area: three; }
 
-.key-zero         { grid-area: zero; }
-.key-reset-input  { grid-area: resetI; }
+/* .key-reset-input  { grid-area: resetI; } */
 .key-reset-result { grid-area: resetR; }
-
+.key-zero         { grid-area: zero; }
+.key-equals       { grid-area: equals}
 
 /* Operators */
 .op-add    { grid-area: add; }
@@ -201,6 +205,7 @@
 
 /* Equals */
 .op-equals { 
-    grid-area: equals;
+    /* grid-area: equals; */
+    grid-area: test;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
