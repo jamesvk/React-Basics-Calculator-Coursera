@@ -5,13 +5,14 @@ import './App.css'
 
 function App() {
   // const inputRef = useRef(null); 
-  const [result, setResult] = useState(0);
-  const [operator, setOperator] = useState(null);
-  const [nextNumber, setNextNumber] = useState(null);
   const [firstNumber, setFirstNumber] = useState(null);
-  const [inputValue, setInputValue] = useState("");
+  const [nextNumber, setNextNumber] = useState(null);
+  const [operator, setOperator] = useState(null);
+  const [result, setResult] = useState(0);
+  const [printScreen, setPrintScreen] = useState("");
+  // const [inputValue, setInputValue] = useState("");
 
-  function handleInputChange(e) {
+  /* function handleInputChange(e) {
     
     const raw = e.target.value;
     const trimmed= raw.slice(0,1); //keep only one digit;
@@ -27,22 +28,50 @@ function App() {
       setResult(value);
       setNextNumber(value);
     } 
-  }
+  } */
 
   function handleDigitClick (e) {
     const value = Number(e);
     // setInputValue(String(value)); //show it in the input bar too
 
     if (operator === null) {
-      setResult(value);
       setFirstNumber(value);
-    } else if (firstNumber){
       setResult(value);
+      setPrintScreen(String(value));
+      return;
+    }
+
+    if (firstNumber !== null) {
       setNextNumber(value);
-    } 
+      setResult(value);
+      setPrintScreen(prev => {
+        const trimmed = prev.trim();
+        if (/[0-9]$/.test(trimmed)) {
+          return trimmed.slice(0, -1) + String(value);
+        }
+
+        return `${trimmed} ${value}`;
+      })
+    }
   }
 
+
+  const Operators = {
+    add: (a,b) => a + b,
+    minus: (a,b) => a - b,
+    times: (a,b) => a * b,
+    divide: (a,b) => a / b
+  }
+
+    const Op_Symbols = {
+    add: "+",
+    minus: "−",
+    times: "×",
+    divide: "/",
+  };
+
   function chooseOperator (e, op) {
+    const symbol = Op_Symbols[op] || op;
     /*e.preventDefault();  By default, a button inside a form has a 
                            type of ‘submit’. We originally added 
                            preventDefault() so the page wouldn’t reload 
@@ -52,13 +81,26 @@ function App() {
                            a reload. It stops one. */
     // inputRef.current.value = '';
     setOperator(op);
-  }
+    setPrintScreen(prev => {
+      const trimmed = prev.trim();
+      if (!trimmed) return "";
+      
+      /*( If the display already ends with an operator, REPLACE it
+      if (/[+\-×/]$/.test(trimmed)) {
+      remove last char (old operator), add new one
+        return trimmed.slice(0, -1) + symbol;
+     } - Regex issue */
+      
+      const lastChar = trimmed[trimmed.length - 1];
+      const isOperatorChar = ["+", "−", "×", "/"].includes(lastChar);
+      
+      if (isOperatorChar && nextNumber == null) {
+        return trimmed.slice(0, -1) + symbol;
+      }
 
-  const Operators = {
-    add: (a,b) => a + b,
-    minus: (a,b) => a - b,
-    times: (a,b) => a * b,
-    divide: (a,b) => a / b
+    // Otherwise, append operator after first number
+      return `${trimmed} ${symbol}`;
+    });
   }
 
   function equals(e) {
@@ -76,10 +118,11 @@ function App() {
     setFirstNumber(newResult);  // carry result forward for chaining
     setNextNumber(null);        // clear second number
     setOperator(null);          // ready for a new operator
-    setInputValue("");          // optional: clear input text
-    if (inputRef.current) {
+    // setInputValue("");          optional: clear input text
+    setPrintScreen(String(newResult));
+    /* if (inputRef.current) {
       inputRef.current.value = "";
-    }
+    } */
   }
 
   function resetInput(e) { 
@@ -92,7 +135,9 @@ function App() {
     setResult(0);
     setNextNumber(0);
     setFirstNumber(0);
-    setInputValue("");
+    setOperator(null);
+    setPrintScreen("");
+    //setInputValue("");
   }; 
 
   // Keyboard buttons
@@ -140,8 +185,8 @@ function App() {
         return;
       }
 
-      // "*" → Shift + "8"
-      if (shiftKey && key === "*") {
+      // "x" -> times
+      if (key === "x") {
         event.preventDefault();
         chooseOperator(event, "times");
         return;
@@ -176,7 +221,7 @@ function App() {
             {/* Result */}
             <div className="display-row display-result-row">
               <output className="display-result" aria-live="polite" aria-label="Current result">
-                {result}
+                {printScreen || result}
               </output>
             </div>
 
@@ -251,7 +296,7 @@ function App() {
             </button>
 
             <button type="button" className="op op-divide"
-              onClick={(e) => chooseOperator(e,"divide")}>÷</button>
+              onClick={(e) => chooseOperator(e,"divide")}>/</button>
 
             {/* Row 5 (equals) */}
             {/* <button type="button" className="op op-equals" 
