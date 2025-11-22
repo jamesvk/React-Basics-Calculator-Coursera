@@ -10,8 +10,10 @@ function App() {
   const [result, setResult] = useState(0);
   const [printScreen, setPrintScreen] = useState("");
 
-  function handleDigitClick (e) {
-    const value = Number(e);
+  /* Handles digit input: sets firstNumber or nextNumber and 
+  updates the printScreen display */
+  function handleDigitClick (digit) {
+    const value = digit;
 
     if (operator === null) {
       setFirstNumber(value);
@@ -27,14 +29,14 @@ function App() {
         const trimmed = prev.trim();
         if (/[0-9]$/.test(trimmed)) {
           return trimmed.slice(0, -1) + String(value);
+        } else {
+          return `${trimmed} ${value}`;
         }
-
-        return `${trimmed} ${value}`;
       })
     }
   }
 
-
+  // Operators
   const Operators = {
     add: (a,b) => a + b,
     minus: (a,b) => a - b,
@@ -42,18 +44,28 @@ function App() {
     divide: (a,b) => a / b
   }
 
-    const Op_Symbols = {
+    const Op_Symbols = { // Be careful: how you declare these operators affects the regex.
     add: "+",
     minus: "−",
     times: "×",
     divide: "/",
   };
 
-  function chooseOperator (e, op) {
+  /* Handles operator input: sets the operator and updates printScreen 
+  by replacing or appending the symbol */
+  function chooseOperator (op) {
+    // No first number yet? Ignore operator.
+    if (firstNumber === null) return;
+
+    //  We already have firstNumber, operator, AND nextNumber → ignore extra operators
+    if (nextNumber !== null) {
+      return; // do nothing: force only 2 numbers + 1 operator
+    }
+
     const symbol = Op_Symbols[op] || op;
     setOperator(op);
     setPrintScreen(prev => {
-      const trimmed = prev.trim();
+      const trimmed = prev.trim(); //trim() removes empty spaces at the start/ending
       if (!trimmed) return "";
       
       const lastChar = trimmed[trimmed.length - 1];
@@ -61,16 +73,18 @@ function App() {
       
       // If the display already ends with an operator, REPLACE it
       if (isOperatorChar && nextNumber == null) {
-        return trimmed.slice(0, -1) + symbol;
+        return trimmed.slice(0, -1) + symbol; /* slice extracts part of a string. 
+                                                 start = 0 > beginning
+                                                 end = -1 > stop one character before end */
+      } else {
+        // Otherwise, append operator after first number
+        return `${trimmed} ${symbol}`;
       }
-
-    // Otherwise, append operator after first number
-      return `${trimmed} ${symbol}`;
     });
   }
 
-  function equals(e) {
-    e.preventDefault();
+  // Executes the selected operation, updates the result, and prepares state for chaining
+  function equals() {
     if (!operator) return;
     
     const operation = Operators[operator];
@@ -79,26 +93,37 @@ function App() {
     if (firstNumber == null || nextNumber == null) return;
 
     const newResult= operation(firstNumber, nextNumber);
-
     setResult(newResult);
     setFirstNumber(newResult);  // carry result forward for chaining
     setNextNumber(null);        // clear second number
     setOperator(null);          // ready for a new operator
     setPrintScreen(String(newResult));
   }
-
- 
-  function resetResult(e) { 
-  	e.preventDefault();
+  
+  // Fully reset all calculator values (numbers, operator, display)
+  function resetResult() { 
     setResult(0);
-    setNextNumber(0);
-    setFirstNumber(0);
+    setNextNumber(null);
+    setFirstNumber(null);
     setOperator(null);
     setPrintScreen("");
   }; 
 
-  // Keyboard buttons
+  // Add keyboard controls: digits, operators, equals (Enter), and reset (Esc)
+  /* useEffect runs after React has painted the UI to the screen. You use it for “side effects” 
+  — things outside of pure rendering, like:
+    talking to window or document
+    timers (setTimeout, setInterval)
+    network requests event listeners (like you’re doing here)
+  So you can think of this as: "Once the component has rendered, set up some keyboard controls.” */
   useEffect(() => {
+    const KEY_TO_OPERATOR = { // used to avoid deeply nested or repetitive if statements for operators
+      "+": "add",
+      "-": "minus",
+      "x": "times",
+      "/": "divide",
+    };
+
     function handleKeyDown(event) {
       const {key, shiftKey} = event;
 
@@ -111,45 +136,26 @@ function App() {
       // ----- EQUALS (Enter or "=") -----
       if (key === "Enter" || key === "=") {
         event.preventDefault();
-        equals(event);
+        equals();
         return;
       }
 
       // ----- RESET (Esc) -----
       if (key === "Escape") {
         event.preventDefault();
-        resetResult(event);
+        resetResult();
         return;
       }
 
       // ----- OPERATORS -----
+      const op = KEY_TO_OPERATOR[key]; /* key is the string produced by the keypress (Shift + "=" → "+").
+                                          You avoid deeply nested or repetitive if statements.
+                                          Rely on the browser's built-in key normalizaion
+                                          You et auto Shift-handling for free */
 
-      // "+" → must press Shift + "=" on keyboard
-      if (shiftKey && key === "+") {
+      if (op) {
         event.preventDefault();
-        chooseOperator(event, "add");
-        return;
-      }
-
-      // "-" key (no need for shift on most keyboards)
-      if (key === "-") {
-        event.preventDefault();
-        chooseOperator(event, "minus");
-        return;
-      }
-
-      // "x" -> times
-      if (key === "x") {
-        event.preventDefault();
-        chooseOperator(event, "times");
-        return;
-      }
-
-      // "/" → divide
-      if (key === "/") {
-        event.preventDefault();
-        chooseOperator(event, "divide");
-        return;
+        chooseOperator(op);
       }
     }
 
@@ -158,8 +164,10 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };  
-  }, [firstNumber, nextNumber, operator]);
-
+  }, [firstNumber, nextNumber, operator]); /* Array holds your dependencies. You only include dependencies 
+                                              that the effect actually uses inside its logic. All other 
+                                              state/function updates will indirectly trigger re-renders 
+                                              anyway, but they don’t require the effect to re-run. */
 
   return ( 
     <div className="App">
@@ -169,9 +177,7 @@ function App() {
         </header>
 
         <section className="calculator" aria-label="Calculator interface">
-          {/* Display / result + input */}
           <section className="display" aria-label="Calculator display">
-            {/* Result */}
             <div className="display-row display-result-row">
               <output className="display-result" aria-live="polite" aria-label="Current result">
                 {printScreen || result}
@@ -189,7 +195,7 @@ function App() {
             <button type="button" className="key key-nine"
               onClick={(e) => handleDigitClick(9)}>9</button>
             <button type="button" className="op op-add" 
-              onClick={(e) => chooseOperator(e,"add")}>+</button>
+              onClick={(e) => chooseOperator("add")}>+</button>
 
             {/* Row 2 */}
             <button type="button" className="key key-four"
@@ -199,7 +205,7 @@ function App() {
             <button type="button" className="key key-six"
               onClick={(e) => handleDigitClick(6)}>6</button>
             <button type="button" className="op op-minus"
-              onClick={(e) => chooseOperator(e,"minus")}>−</button>
+              onClick={(e) => chooseOperator("minus")}>−</button>
 
             {/* Row 3 */}
             <button type="button" className="key key-one"
@@ -209,7 +215,7 @@ function App() {
             <button type="button" className="key key-three"
               onClick={(e) => handleDigitClick(3)}>3</button>
             <button type="button" className="op op-times"
-              onClick={(e) => chooseOperator(e,"times")}>×</button>
+              onClick={(e) => chooseOperator("times")}>×</button>
 
             {/* Row 4 (reset / zero / equal) */}
             <button type="button" className="key key-reset-result" 
@@ -220,13 +226,18 @@ function App() {
               onClick={(e) => handleDigitClick(0)}>0</button>
             <button type="button" className="key key-equals" 
               onClick={equals}>
-              E
+              =
             </button>
             <button type="button" className="op op-divide"
-              onClick={(e) => chooseOperator(e,"divide")}>/</button>
+              onClick={(e) => chooseOperator("divide")}>/</button>
           </section>
         </section>
       </main>
+
+      <p className="l-w">
+        Listen with:<br />
+        Adieu Aru & A.L.I.S.O.N - Discorde
+      </p>
     </div> 
   )
 }

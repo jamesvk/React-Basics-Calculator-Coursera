@@ -1,7 +1,12 @@
 .App {
     position: relative; /* so the absolute child uses this as a reference */
-    width: 260px;
-    height: 360px;
+    /* width: 260px; */
+    width: 304px;
+    /* height: 360px; */
+    height: 380px;
+    border: 1.5px solid rgba(0,0,0,.75);
+    border-radius: var(--radius-sm);
+    background: rgba(138, 92, 255, .15);
 }
 
 .calculatorShell {
@@ -12,8 +17,8 @@
     left: 50%;
     transform: translate(-50%, -55%); /* perfect centering */
     z-index: 3;
-    width: 100%;
-    
+    /* width: 100%; */
+    width: 260px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
@@ -68,7 +73,6 @@
   text-shadow:
     0 0 1px var(--accent),
     1.5px 1px 2px rgba(138, 92, 255, .5);
-
 }
 
 .display {
@@ -177,6 +181,27 @@
     box-shadow:
         0 0 2px rgba(0,0,0,0.2) inset;
 }
+
+.l-w {
+    position: absolute;
+    left: 50%;                         /* center horizontally */
+    transform: translateX(-50%);       /* pull it back by 50% of its own width */
+    bottom: -4px;                     /* position under calculator */
+    font-family: 'Lora', serif;
+    font-size: var(--font-size-xs);
+    color: rgba(0,0,0, 1);
+    letter-spacing: 0.03em;
+    white-space: nowrap;               /* prevent auto line wrapping */
+    text-align: center;                /* center lines */
+    transition: bottom 280ms ease;
+    cursor: pointer;
+    font-weight: 300;
+    text-shadow: 0 .55px 0 rgba(0,0,0,0.15);
+}
+
+/* .l-w:hover {
+    bottom: -15px;
+} */
 
 /* Number keys */
 .key-seven { grid-area: seven; }
