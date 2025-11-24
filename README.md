@@ -19,7 +19,7 @@ To complement the calculator’s neon cyber aesthetic, the UI includes a small p
 Listenwith : Adieu Aru & A.L.I.S.O.N – Discorde
 
 Preview
-![Calculator Preview](public/calculator-preview.png)
+<img src="preview.png" width="300" alt="Calculator preview" />
 
 Features
 * Single-digit numerical input only (0–9)
