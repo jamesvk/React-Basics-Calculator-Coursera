@@ -1,16 +1,62 @@
-# React + Vite
+Simplest Calculator (React + Vite)
+A retro-styled, single-digit calculator built with React and Vite, focusing on clean state management, keyboard input, and foundational React concepts like re-renders, controlled state, and event handling. 
+This project is intentionally simple — the goal is clarity, learning, and a polished UI experience.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+About Vite
+This project was created using Vite, a modern build tool and dev server that replaces older setups like Create React App (CRA).
 
-Currently, two official plugins are available:
+Vite provides:
+* Instant startup using native ES modules
+* Lightning-fast hot reloads
+* Optimized production builds (via Rollup)
+* Simpler configuration and modern tooling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Vite is now the recommended standard for building modern React applications due to its speed and developer experience.
 
-## React Compiler
+Listen With (Optional)
+To complement the calculator’s neon cyber aesthetic, the UI includes a small personal touch. Try listening while using the app to enhance the experience.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Listenwith : Adieu Aru & A.L.I.S.O.N – Discorde
 
-## Expanding the ESLint configuration
+Preview
+![Calculator Preview](public/calculator-preview.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Features
+* Single-digit numerical input only (0–9)
+* Input via button clicks or ⌨️ keyboard keys
+* Four operators: add, minus, multiply, divide
+* Supports operation chaining
+* Keyboard shortcuts:
+    * 0–9 → digits
+    * + - × / → operators
+    * Enter → equals
+    * Escape → reset
+* Cyber-inspired UI with gradients, glow effects, and custom design tokens
+* Defensive preventDefault() to avoid browser defaults interfering with keyboard input
+
+Input Rules
+This calculator intentionally supports only one digit at a time:
+* Accepts a single digit (0–9) for each operand
+* Digits can be entered by clicking buttons or typing
+* Operators only work after the first digit is entered
+* Multi-digit numbers are not supported (planned enhancement)
+
+What I Learned
+* How React state updates trigger re-renders, not full resets
+* Key differences between:
+    * React re-render
+    * Browser reload (resets all state)
+* Managing multiple pieces of related state via useState
+* Using the functional updater: setPrintScreen(prev => { ... })
+* Building controlled display output using .trim(), regex, and .slice()
+* How and why event.preventDefault() is used for keyboard input (not necessary for this app version)
+* Attaching & cleaning up event listeners with useEffect
+* Enhancing UI accessibility with semantic HTML and aria-live attributes
+
+Tech Stack
+* React (Hooks)
+* Vite
+* JavaScript (ES6+)
+* CSS Grid + Flexbox
+* Custom design tokens (spacing, radii, fonts)
+
