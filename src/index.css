@@ -13,7 +13,12 @@
 
 /* ------------- Reset & base ------------- */
 *, *::before, *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* box-sizing: content-box is the default browser default.
+                             For this it represents just the content, not including
+                             padding or border. With box-sizing: border-box, the width
+                             includes the padding and the border, so your element never grows larger 
+                             than the width you set. The padding and border are included so if you 
+                             make padding and border larger, the content size will decrease. */
 }
 
 html, body {

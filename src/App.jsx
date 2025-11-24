@@ -1,9 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react' /* These are React hooks:
+                                                       useState -> stateful values that trigger re-renders when changed.
+                                                       useRef -> persistent mutable value that doesn't cause re-renders (not used in this project version).
+                                                       useEffect -> runs side effects (like event listeners) after React paints to the DOM. */
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
+function App() { /* function component. React calls this function to decide what the UI should look like. useState
+                    creates a state for this component. Every time these setters are called with a different value
+                    and state changes > app re-renders */
   const [firstNumber, setFirstNumber] = useState(null);
   const [nextNumber, setNextNumber] = useState(null);
   const [operator, setOperator] = useState(null);
@@ -12,7 +17,11 @@ function App() {
 
   /* Handles digit input: sets firstNumber or nextNumber and 
   updates the printScreen display */
-  function handleDigitClick (digit) {
+  function handleDigitClick (digit) { /* in these function components...
+                                         - calling a setter schedules a future render
+                                         - the component keeps running to completion
+                                         - React applies the update and re-renders After the function finishes
+                                         - The next render will have the new state value */
     const value = digit;
 
     if (operator === null) {
@@ -26,9 +35,12 @@ function App() {
       setNextNumber(value);
       setResult(value);
       setPrintScreen(prev => {
-        const trimmed = prev.trim();
-        if (/[0-9]$/.test(trimmed)) {
-          return trimmed.slice(0, -1) + String(value);
+        const trimmed = prev.trim(); // trim() removes whitespace at the start and end of the string. "  45. +. ".trim() => "45 +"
+        if (/[0-9]$/.test(trimmed)) { /* This is a regular expression check.
+                                         [0-9] means “any digit”
+                                         $ means “at the end of the string”
+                                         .test(str) returns true or false */
+          return trimmed.slice(0, -1) + String(value); // slice(0, -1) means take the string from index 0 up to (but not including) the last character"
         } else {
           return `${trimmed} ${value}`;
         }
@@ -92,7 +104,7 @@ function App() {
 
     if (firstNumber == null || nextNumber == null) return;
 
-    const newResult= operation(firstNumber, nextNumber);
+    const newResult = operation(firstNumber, nextNumber);
     setResult(newResult);
     setFirstNumber(newResult);  // carry result forward for chaining
     setNextNumber(null);        // clear second number
@@ -116,7 +128,8 @@ function App() {
     timers (setTimeout, setInterval)
     network requests event listeners (like you’re doing here)
   So you can think of this as: "Once the component has rendered, set up some keyboard controls.” */
-  useEffect(() => {
+
+  useEffect(() => { // useEffect runs after the component's JSX has been rendered to the DOM. 
     const KEY_TO_OPERATOR = { // used to avoid deeply nested or repetitive if statements for operators
       "+": "add",
       "-": "minus",
@@ -125,7 +138,7 @@ function App() {
     };
 
     function handleKeyDown(event) {
-      const {key, shiftKey} = event;
+      const {key, shiftKey} = event; // key and shiftKey are standard DOM KeyboardEvent properties defined by the broswer
 
       // If the user presses a digit key 0–9, treat it like a button click
       if (key >= "0" && key <= "9") {

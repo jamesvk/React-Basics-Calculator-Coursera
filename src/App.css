@@ -1,23 +1,25 @@
+/* ========== Layout Shell ========== */
 .App {
     position: relative; /* so the absolute child uses this as a reference */
-    /* width: 260px; */
     width: 304px;
-    /* height: 360px; */
     height: 380px;
-    border: 1.5px solid rgba(0,0,0,.75);
+    border: 1px dashed rgba(138, 92, 255, .75);
     border-radius: var(--radius-sm);
-    background: rgba(138, 92, 255, .15);
+    background: rgba(138, 92, 255, .1);
 }
 
 .calculatorShell {
-    align-items: stretch;  /* children fill their tracks */
+    /* align-items: stretch;  /* children fill their tracks vertically. justify-content
+                              fills their tracks horizontally. Stretch will expand each item
+                              to fill the entire row height. If your row is auto, stretch makes
+                              the item expand to match the tallest content in that row. This 
+                              however is not necessary here because stretch is the default setting */ 
     position: absolute;
     flex-shrink: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%); /* perfect centering */
     z-index: 3;
-    /* width: 100%; */
     width: 260px;
     display: grid;
     grid-template-columns: 1fr;
@@ -48,6 +50,7 @@
     max-width: 100%;
 }
 
+/* ========== Header ========== */
 .calculator-header {
     grid-area: title;
     padding-top: var(--space-2);
@@ -75,6 +78,7 @@
     1.5px 1px 2px rgba(138, 92, 255, .5);
 }
 
+/* ========== Display ========== */
 .display {
     grid-area: display;
     position: relative;
@@ -84,7 +88,6 @@
 }
 
 .display-row {
-    text-align: center;
     text-align: right;
     padding: 0.45rem 0.7rem;
     border-radius: var(--radius-sm);
@@ -113,28 +116,7 @@
         0 2px 10px rgba(0,0,0,0.45);
 }
 
-#number-input {
-    width: 100%;
-    /* Off-white panel */
-    background: #F8F8FA; /* slightly off-white */
-    color: rgba(0,0,0,.55);         /* clean dark text */
-    border-radius: var(--radius-sm);
-    border: 0.5px solid rgba(0,0,0,0.35);
-    font-family: 'Orbitron', sans-serif;
-    font-size: var(--font-size-h6);
-    letter-spacing: 0.03em;
-    text-align: center; /* centers placeholder AND typed text */
-    text-shadow:
-        0 1px 2px rgba(255, 255, 255, 0.55),
-        0 0 6px rgba(0, 0, 0, 0.25);
-    outline: none;
-    /* subtle premium shadow */
-    box-shadow:
-        inset 0 1px 3px rgba(0,0,0,.3),
-        0 1px 5px rgba(0,0,0,.1);
-    padding: 0.4rem 0.7rem;
-}
-
+/* ========== Keypad ========== */
 .keypad {
     grid-area: pad;
     display: grid;
@@ -182,27 +164,24 @@
         0 0 2px rgba(0,0,0,0.2) inset;
 }
 
+/* ========== Meta / Signature ========== */
 .l-w {
     position: absolute;
     left: 50%;                         /* center horizontally */
     transform: translateX(-50%);       /* pull it back by 50% of its own width */
-    bottom: -4px;                     /* position under calculator */
+    bottom: -2px;                     /* position under calculator */
     font-family: 'Lora', serif;
     font-size: var(--font-size-xs);
     color: rgba(0,0,0, 1);
     letter-spacing: 0.03em;
-    white-space: nowrap;               /* prevent auto line wrapping */
+    white-space: nowrap;               /* white-space in CSS controls how text is handled inside an element - no wrap prevents auto line wrapping */
     text-align: center;                /* center lines */
-    transition: bottom 280ms ease;
     cursor: pointer;
     font-weight: 300;
     text-shadow: 0 .55px 0 rgba(0,0,0,0.15);
 }
 
-/* .l-w:hover {
-    bottom: -15px;
-} */
-
+/* ========== Key Layout Mapping ========== */
 /* Number keys */
 .key-seven { grid-area: seven; }
 .key-eight { grid-area: eight; }
@@ -226,10 +205,3 @@
 .op-minus  { grid-area: minus; }
 .op-times  { grid-area: times; }
 .op-divide { grid-area: divide; }
-
-/* Equals */
-.op-equals { 
-    /* grid-area: equals; */
-    grid-area: test;
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-}
