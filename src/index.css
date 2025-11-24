@@ -1,167 +1,177 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-*/
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;500;600&display=swap');
 
 /* ------------- Reset & base ------------- */
 *, *::before, *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* box-sizing: content-box is the default browser default.
+                             For this it represents just the content, not including
+                             padding or border. With box-sizing: border-box, the width
+                             includes the padding and the border, so your element never grows larger 
+                             than the width you set. The padding and border are included so if you 
+                             make padding and border larger, the content size will decrease. */
 }
 
 html, body {
   height: 100%;
   margin: 0;
-}
-
-:root {
-  /* ------------ Color tokens (optional skeleton) ------------ */
-  --color-bg: #0f172a;          /* page background */
-  --color-surface: #111827;     /* card / calculator body */
-  --color-surface-alt: #020617; /* header / display bar */
-
-  --color-border-subtle: #1f2937;
-  --color-border-strong: #374151;
-
-  --color-text-main: #f9fafb;
-  --color-text-muted: #9ca3af;
-  --color-accent: #22c55e;
-  --color-accent-soft: #4ade80;
-  --color-danger: #ef4444;
-
-  /* ------------ Spacing scale (spacing tokens) ------------ */
-  /*
-    Use these for margin & padding:
-    xs = very tight, xl/2xl = larger gaps
-  */
-  --space-0: 0;
-  --space-1: 0.25rem;  /* 4px */
-  --space-2: 0.5rem;   /* 8px */
-  --space-3: 0.75rem;  /* 12px */
-  --space-4: 1rem;     /* 16px */
-  --space-5: 1.5rem;   /* 24px */
-  --space-6: 2rem;     /* 32px */
-  --space-7: 3rem;     /* 48px */
-  --space-8: 4rem;     /* 64px */
-
-  /* Short aliases if you like them: */
-  --space-xs: var(--space-1);
-  --space-sm: var(--space-2);
-  --space-md: var(--space-4);
-  --space-lg: var(--space-5);
-  --space-xl: var(--space-6);
-
-    /* ----------------------------- STATIC TYPE SCALE ----------------------------- */
-  --font-size-xs: 0.75rem;   /* 12px */
-  --font-size-sm: 0.875rem;  /* 14px */
-  --font-size-md: 1rem;      /* 16px */
-  --font-size-lg: 1.125rem;  /* 18px */
-  --font-size-xl: 1.25rem;   /* 20px */
-  --font-size-2xl: 1.5rem;   /* 24px */
-  --font-size-3xl: 1.875rem; /* 30px */
-  --font-size-4xl: 2.25rem;  /* 36px */
-
-  /* Headings (clean mapping) */
-  --font-size-h1: var(--font-size-3xl);
-  --font-size-h2: var(--font-size-2xl);
-  --font-size-h3: var(--font-size-xl);
-  --font-size-h4: var(--font-size-lg);
-  --font-size-h5: var(--font-size-md);
-  --font-size-h6: var(--font-size-sm);
-
-  /* ----------------------------- LINE HEIGHT ----------------------------- */
-  --line-tight: 1.1;
-  --line-normal: 1.4;
-  --line-relaxed: 1.6;
-
-  /* ----------------------------- RADII ----------------------------- */
-  --radius-0: 0;
-  --radius-xs: 0.125rem; /* 2px */
-  --radius-sm: 0.25rem;  /* 4px */
-  --radius-md: 0.5rem;   /* 8px */
-  --radius-lg: 0.75rem;  /* 12px */
-  --radius-xl: 1rem;     /* 16px */
-  --radius-2xl: 1.25rem; /* 20px */
-  --radius-pill: 999px;
-
-  /* ----------------------------- SHADOWS ----------------------------- */
-  --shadow-soft: 0 4px 8px rgba(0,0,0,0.25);
-  --shadow-medium: 0 6px 16px rgba(0,0,0,0.35);
-  --shadow-strong: 0 8px 28px rgba(0,0,0,0.45);
-
-  /* ----------------------------- TRANSITIONS ----------------------------- */
-  --transition-fast: 120ms ease-out;
-  --transition-normal: 180ms ease-out;
-  --transition-slow: 260ms ease;
-
-
-#root {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+body {
+  /* background: rgba(138, 92, 255, .1); */
+  background: rgba(255,255,255, 1);
+}
+
+:root {
+/*                                COLOR TOKENS                            */
+/* ----------------------------- Base Surfaces ----------------------------- */
+--calc-bg: #0C0C17;            /* rgb(12, 12, 23)   */
+--calc-surface: #161625;       /* rgb(22, 22, 37)   */
+--calc-border: #2D2C46;        /* rgb(45, 44, 70)   */
+
+--color-bg: #0F172A;           /* rgb(15, 23, 42)   */
+--color-surface: #111827;      /* rgb(17, 24, 39)   */
+--color-surface-alt: #020617;  /* rgb(2, 6, 23)     */
+
+--color-border-subtle: #1F2937; /* rgb(31, 41, 55)  */
+--color-border-strong: #374151; /* rgb(55, 65, 81)  */
+
+/* ----------------------------- Text Colors ------------------------------- */
+--text-primary: #ECEAFF;       /* rgb(236, 234, 255) */
+--text-secondary: #A3A1C5;     /* rgb(163, 161, 197) */
+
+--color-text-main: #F9FAFB;    /* rgb(249, 250, 251) */
+--color-text-muted: #9CA3AF;   /* rgb(156, 163, 175) */
+
+/* ----------------------------- Accent / Action --------------------------- */
+--accent: #8A5CFF;             /* rgb(138, 92, 255)  */
+--accent-glow: #B894FF;        /* rgb(184, 148, 255) */
+
+--color-accent: #22C55E;       /* rgb(34, 197, 94)   */
+--color-accent-soft: #4ADE80;  /* rgb(74, 222, 128)  */
+--color-danger: #EF4444;       /* rgb(239, 68, 68)   */
+
+/*                          NEON YELLOW SYSTEM                             */
+
+/* Pure Neon Yellow */
+--neon-yellow-pure: #FFFF33;          /* rgb(255, 255, 51)  */
+--neon-yellow-pure-glow: #FFFF99;     /* rgb(255, 255, 153) */
+
+/* Electric Yellow — cyberpunk */
+--neon-yellow-electric: #CCFF00;      /* rgb(204, 255, 0)   */
+--neon-yellow-electric-glow: #E6FF66; /* rgb(230, 255, 102) */
+
+/* Laser Yellow */
+--neon-yellow-laser: #F8FF00;         /* rgb(248, 255, 0)   */
+--neon-yellow-laser-glow: #FDFF66;    /* rgb(253, 255, 102) */
+
+/* Acid Neon (your current favorite) */
+--neon-yellow-acid: #D0FF14;          /* rgb(208, 255, 20)  */
+--neon-yellow-acid-glow: #E8FF7A;     /* rgb(232, 255, 122) */
+
+/* Neon Lemon */
+--neon-yellow-lemon: #FFFC00;         /* rgb(255, 252, 0)   */
+--neon-yellow-lemon-glow: #FFF966;    /* rgb(255, 249, 102) */
+
+
+/*                          CYBERPUNK PINK SYSTEM                          */
+
+/* --- Cool Cyber Pink Set --- */
+--pink-soft-cyber: #FF8AE8;           /* rgb(255, 138, 232) */
+--pink-mid-cyber: #FF5CDA;            /* rgb(255, 92, 218)  */
+--pink-hot-cyber: #FF33CC;            /* rgb(255, 51, 204)  */
+--pink-electric: #FF0FCF;             /* rgb(255, 15, 207)  */
+--pink-violet-hybrid: #D66BFF;        /* rgb(214, 107, 255) */
+
+/* Pastel / Glass Pinks */
+--pink-pastel-rose: #FFB2D8;          /* rgb(255, 178, 216) */
+--pink-cotton-candy: #FF99EE;         /* rgb(255, 153, 238) */
+--pink-glass-neon: #FFB7F5;           /* rgb(255, 183, 245) */
+
+/* --- Deep Futuristic Magenta (darker set) --- */
+--pink-synthwave: #D400A8;            /* rgb(212, 0, 168)   */
+--pink-plasma: #C60096;               /* rgb(198, 0, 150)   */
+--pink-ultraviolet: #9A009C;          /* rgb(154, 0, 156)   */
+
+/* ------------ Spacing scale (spacing tokens) ------------ */
+/*
+  Use these for margin & padding:
+  xs = very tight, xl/2xl = larger gaps
+*/
+--space-0: 0;
+--space-1: 0.25rem;  /* 4px */
+--space-2: 0.5rem;   /* 8px */
+--space-3: 0.75rem;  /* 12px */
+--space-4: 1rem;     /* 16px */
+--space-5: 1.5rem;   /* 24px */
+--space-6: 2rem;     /* 32px */
+--space-7: 3rem;     /* 48px */
+--space-8: 4rem;     /* 64px */
+
+/* Short aliases if you like them: */
+--space-xs: var(--space-1);
+--space-sm: var(--space-2);
+--space-md: var(--space-4);
+--space-lg: var(--space-5);
+--space-xl: var(--space-6);
+
+  /* ----------------------------- STATIC TYPE SCALE ----------------------------- */
+--font-size-xs: 0.75rem;   /* 12px */
+--font-size-sm: 0.875rem;  /* 14px */
+--font-size-md: 1rem;      /* 16px */
+--font-size-lg: 1.125rem;  /* 18px */
+--font-size-xl: 1.25rem;   /* 20px */
+--font-size-2xl: 1.5rem;   /* 24px */
+--font-size-3xl: 1.875rem; /* 30px */
+--font-size-4xl: 2.25rem;  /* 36px */
+
+/* Headings (clean mapping) */
+--font-size-h1: var(--font-size-3xl);
+--font-size-h2: var(--font-size-2xl);
+--font-size-h3: var(--font-size-xl);
+--font-size-h4: var(--font-size-lg);
+--font-size-h5: var(--font-size-md);
+--font-size-h6: var(--font-size-sm);
+
+/* ----------------------------- LINE HEIGHT ----------------------------- */
+--line-tight: 1.1;
+--line-normal: 1.4;
+--line-relaxed: 1.6;
+
+/* ----------------------------- RADII ----------------------------- */
+--radius-0: 0;
+--radius-xs: 0.125rem; /* 2px */
+--radius-sm: 0.25rem;  /* 4px */
+--radius-md: 0.5rem;   /* 8px */
+--radius-lg: 0.75rem;  /* 12px */
+--radius-xl: 1rem;     /* 16px */
+--radius-2xl: 1.25rem; /* 20px */
+--radius-pill: 999px;
+
+/* ----------------------------- SHADOWS ----------------------------- */
+--shadow-soft: 0 4px 8px rgba(0,0,0,0.25);
+--shadow-medium: 0 6px 16px rgba(0,0,0,0.35);
+--shadow-strong: 0 8px 28px rgba(0,0,0,0.45);
+
+/* ----------------------------- TRANSITIONS ----------------------------- */
+--transition-fast: 120ms ease-out;
+--transition-normal: 180ms ease-out;
+--transition-slow: 260ms ease;
+
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
 }
